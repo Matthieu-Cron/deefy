@@ -78,7 +78,7 @@ h2,h3, p {
                 $act = new AddPlaylistAction();
                 break;
             case 'add-track':
-                $act = new AddTackAction();
+                $act = new AddTrackAction();
                 break;
             case 'add-user':
                 $act = new AddUserAction();
