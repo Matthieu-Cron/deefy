@@ -25,7 +25,7 @@ class AudioList
     public function getTotalTime():int
     {
         $n=0;
-        if($this->liste != null)
+        if(isset($this->liste))
         {
             foreach($this->liste as $track)
             {
@@ -37,6 +37,11 @@ class AudioList
 
     public function getNumberOfTracks():int
     {
-        return count($this->liste);
+        $res =0;
+        if(isset($this->liste))
+        {
+            $res=count($this->liste);
+        }
+        return $res;
     }
 }

@@ -32,8 +32,8 @@ class AddPlaylistAction extends Action
             $_SESSION['playlist'] = serialize($playlist);
 
             $renderer = new AudioListRenderer($playlist);
-            //$html = $renderer->render();
-            $html = "<b>Bonjour</b>";
+            $html = $renderer->render();
+            //$html = "<b>Bonjour</b>";
         }
         return $html;
     }
