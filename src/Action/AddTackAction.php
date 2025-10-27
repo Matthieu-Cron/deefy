@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy\action;
+namespace iutnc\deefy\Action;
 
 use iutnc\deefy\audio\tracks\AudioTrack;
 use iutnc\deefy\renders\AudioListRenderer;
@@ -50,10 +50,10 @@ class AddTackAction extends Action
                     return "<p>Erreur : Le Duree est obligatoire.</p>";
                 }
 
-                $artiste = $_POST['Artiste'];
-                $titre = $_POST['Titre'];
-                $genre = $_POST['Genre'];
-                $duree = $_POST['Duree'];
+                $artiste = filter_var($_POST['Artiste'], FILTER_SANITIZE_STRING);
+                $titre = filter_var($_POST['Titre'], FILTER_SANITIZE_STRING);
+                $genre = filter_var($_POST['Genre'], FILTER_SANITIZE_STRING);
+                $duree = filter_var($_POST['Duree'], FILTER_SANITIZE_NUMBER_INT);
                 $track = new AudioTrack($artiste, $titre, $genre, $duree,"src/sons/01-Im_with_you_BB-King-Lucille.mp3");
                 $pl = unserialize($_SESSION['PlayList']);
                 $pl->add($track);
