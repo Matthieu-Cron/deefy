@@ -18,7 +18,7 @@ class AddTrackAction extends Action
 
             $html = "<form method='post' action='?action=add-track' enctype='multipart/form-data'>
                 <label>Nom de l'artiste :</label>
-                <input type='text' name='Artiste' placeholder=\"Nom de l'artiste\" required><br>
+                <input type='text' name='Artiste' placeholder='Nom de l'artiste' required><br>
 
                 <label>Titre de Track :</label>
                 <input type='text' name='Titre' placeholder='Titre du Track' required><br>
@@ -41,7 +41,7 @@ class AddTrackAction extends Action
 
             return $html;
         } else {
-            
+          
             if (!isset($_POST['Artiste']) || trim($_POST['Artiste']) === '') {
                 return "<p>Erreur : Le nom de l'Artiste est obligatoire.</p>";
             }
@@ -64,28 +64,36 @@ class AddTrackAction extends Action
             $fileTmpName = $_FILES['userfile']['tmp_name'];
             $fileType = $_FILES['userfile']['type'];
 
-           
+            
             if (substr($fileName, -4) !== '.mp3' || $fileType !== 'audio/mpeg') {
                 return "<p>Erreur : Le fichier doit être un MP3.</p>";
             }
 
-           
+            
+            $audioDir = __DIR__ . '/../sons/';
+
+            
+            if (!is_dir($audioDir)) {
+                mkdir($audioDir, 0777, true);
+            }
+
+            
             $randomName = uniqid('audio_', true) . '.mp3';
-            $destination = __DIR__ . '/../../audio/' . $randomName;
+            $destination = $audioDir . $randomName;
 
             if (!move_uploaded_file($fileTmpName, $destination)) {
                 return "<p>Erreur : Impossible de sauvegarder le fichier.</p>";
             }
 
-        
+            
             $artiste = htmlspecialchars(trim($_POST['Artiste']));
             $titre = htmlspecialchars(trim($_POST['Titre']));
             $genre  = htmlspecialchars(trim($_POST['Genre']));
             $duree  = (int) $_POST['Duree'];
 
-            $track = new AudioTrack($artiste, $titre, $genre, $duree, 'audio/' . $randomName);
+            $track = new AudioTrack($artiste, $titre, $genre, $duree, 'src/sons/' . $randomName);
 
-         
+           
             $pl = unserialize($_SESSION['PlayList']);
             $pl->add($track);
             $_SESSION['PlayList'] = serialize($pl);
@@ -95,7 +103,7 @@ class AddTrackAction extends Action
             $html = "<h2>Nouvelle Playlist en session :</h2>";
             $html .= $renderer->render();
 
-            return $html; //
+            return $html;
         }
     }
 }
