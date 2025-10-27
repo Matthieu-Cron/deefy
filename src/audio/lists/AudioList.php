@@ -1,6 +1,7 @@
 <?php
 namespace iutnc\deefy\audio\lists;
 use Exception;
+use iutnc\deefy\audio\tracks\AudioTrack;
 
 class AudioList
 {
@@ -18,7 +19,10 @@ class AudioList
             $this->liste = [];
         }
     }
-
+    public function add(AudioTrack $track)
+    {
+        $this->liste[] = $track;
+    }
     public function __get(string $at):mixed {
         if (property_exists ($this, $at)) return $this->$at;
         throw new Exception ("$at: invalid property");

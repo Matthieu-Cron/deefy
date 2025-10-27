@@ -4,7 +4,7 @@ namespace iutnc\deefy\dispatch;
 
 use iutnc\deefy\action\Action;
 use iutnc\deefy\action\AddPlaylistAction;
-use iutnc\deefy\action\AddPodcastTackAction;
+use iutnc\deefy\action\AddTackAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlayListeAction;
 
@@ -75,7 +75,7 @@ h2,h3, p {
                 $act = new AddPlaylistAction();
                 break;
             case 'add-track':
-                $act = new AddPodcastTackAction();
+                $act = new AddTackAction();
                 break;
             default:
                 $act = new DefaultAction();
