@@ -54,6 +54,8 @@ class AddPodcastTackAction extends Action
             if (!file_exists($fullPath)) {
                 return "<p>Erreur : le fichier sélectionné n'existe pas.</p>";
             }
+
+            $fichier = filter_var($_POST['fichier'], FILTER_SANITIZE_FULL_SPECIAL_CHARS); 
             
             $titre = pathinfo($filename, PATHINFO_FILENAME);
             //Test de valeur du fichier musique
