@@ -13,12 +13,12 @@ class AddPlaylistAction extends Action
     {
         if ($this->http_method === 'GET') {
             if(!isset($_SESSION['PlayList'])){
-                $html = "<form method=\"post\" action=\"?action=add-playlist\">
+                $html = "<form method='post' action='?action=add-playlist'>
                     <label>
                         Nom de la playlist :
-                        <input type=\"text\" name=\"nom\" placeholder=\"Nom de la playlist\" required>
+                        <input type='text' name='Nom' placeholder='Nom de la playlist' required>
                     </label>
-                    <button type=\"submit\">Créer</button>
+                    <button type='submit'>Créer</button>
                 </form>";
             }
             else
@@ -32,10 +32,10 @@ class AddPlaylistAction extends Action
         }
         else
         {
-            if (!isset($_POST['nom']) || trim($_POST['nom']) === '') {
-                return "<p>Erreur : le nom de la playlist est obligatoire.</p>";
+            if (!isset($_POST['Nom']) || trim($_POST['Nom']) === '') {
+                return "<p>Erreur : Le nom de la playlist est obligatoire.</p>";
             }
-            $nom = filter_var($_POST['nom'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom = filter_var($_POST['Nom'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             $playlist = new PlayLists($nom);
             $_SESSION['PlayList'] = serialize($playlist);
