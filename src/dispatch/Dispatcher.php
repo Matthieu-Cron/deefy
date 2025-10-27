@@ -23,18 +23,45 @@ class Dispatcher
     <meta charset=\"UTF-8\">
     <title>Deffy</title>
 </head>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+h2, p {
+  margin: 10px;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+}
+.navbar li {
+  float: left;
+}
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navbar li a:hover {
+  background-color: lightgray;
+}
+</style>
 <body>
-    <h1>Application deffy</h1>
-            ".$html."
-        <nav>
-        <h2>Barre d'action</h2>
-        <ul>
+        <ul class='navbar'>
             <li><a href='.?action=playlist'>AFFICHER LA PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-playlist'>CREER 1 PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-track'>AJOUTER 1 TRACK DANS LA PLAYLIST</a></li>
             <li><a href='.'>ACTION PAR DÉFAULT</a></li>
         </ul>
-    </nav>
+    <h1>Application deffy</h1>
+    ".$html."
 </body>";
         echo $res;
     }

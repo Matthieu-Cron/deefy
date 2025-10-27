@@ -9,7 +9,7 @@ class DefaultAction extends Action
 
     public function execute(): string
     {
-        return "Bienvenue sur la page de deffy</p>";
+        return "<p>Bienvenue sur la page de deffy</p>";
     }
 
 }
