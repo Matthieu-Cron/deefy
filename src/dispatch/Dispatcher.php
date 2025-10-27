@@ -4,8 +4,8 @@ namespace iutnc\deefy\dispatch;
 
 use iutnc\deefy\action\Action;
 use iutnc\deefy\action\AddPlaylistAction;
-use iutnc\deefy\action\AddPodcastTackAction;
-use iutnc\deefy\action\AddTackAction;
+use iutnc\deefy\action\AddPodcastTrackAction;
+use iutnc\deefy\action\AddTrackAction;
 use iutnc\deefy\action\AddUserAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlayListeAction;
