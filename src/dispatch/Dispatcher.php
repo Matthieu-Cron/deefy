@@ -4,7 +4,9 @@ namespace iutnc\deefy\dispatch;
 
 use iutnc\deefy\action\Action;
 use iutnc\deefy\action\AddPlaylistAction;
+use iutnc\deefy\action\AddPodcastTackAction;
 use iutnc\deefy\action\AddTackAction;
+use iutnc\deefy\action\AddUserAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlayListeAction;
 
@@ -58,6 +60,7 @@ h2,h3, p {
             <li><a href='.?action=playlist'>AFFICHER LA PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-playlist'>CREER 1 PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-track'>AJOUTER 1 TRACK DANS LA PLAYLIST</a></li>
+            <li><a href='.?action=add-user'>Connexion</a></li>
             <li><a href='.'>ACTION PAR DÉFAULT</a></li>
         </ul>
     <h1>Application deffy</h1>
@@ -76,6 +79,9 @@ h2,h3, p {
                 break;
             case 'add-track':
                 $act = new AddTackAction();
+                break;
+            case 'add-user':
+                $act = new AddUserAction();
                 break;
             default:
                 $act = new DefaultAction();
