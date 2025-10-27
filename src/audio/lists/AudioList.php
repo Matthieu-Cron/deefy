@@ -1,5 +1,7 @@
 <?php
 namespace iutnc\deefy\audio\lists;
+use Exception;
+
 class AudioList
 {
     protected string $nom;

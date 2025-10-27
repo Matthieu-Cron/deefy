@@ -1,5 +1,7 @@
 <?php
 namespace iutnc\deefy\audio\tracks;
+use Exception;
+
 class PodcastTrack extends \iutnc\deefy\audio\tracks\AudioTrack
 {
     private String $date;
@@ -9,12 +11,8 @@ class PodcastTrack extends \iutnc\deefy\audio\tracks\AudioTrack
      */
     public function __construct(string $date,string $artiste, string $titre, string $genre, int $duree, string $filename)
     {
+        parent::__construct($artiste,$titre,$genre,$duree,$filename);
         $this->date = $date;
-        $this->artiste = $artiste;
-        $this->titre = $titre;
-        $this->genre = $genre;
-        $this->duree = $duree;
-        $this->filename = $filename;
     }
 
     public function __get(string $at):mixed {

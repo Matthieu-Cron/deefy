@@ -1,5 +1,7 @@
 <?php
 namespace iutnc\deefy\audio\tracks;
+use Exception;
+
 Class AudioTrack{
     protected string $titre;
     protected string $artiste;

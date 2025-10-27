@@ -1,24 +1,23 @@
 <?php
 namespace iutnc\deefy\audio\tracks;
+use Exception;
+
 class AlbumTrack extends \iutnc\deefy\audio\tracks\AudioTrack {
     private string $album;
-    private string $année;
+    private string $annee;
     private int $numero;
 
     /**
      * @param string $album
-     * @param string $année
+     * @param string $annee
      * @param int $numero
      */
-    public function __construct(string $artiste, string $titre, string $genre, int $duree, string $filename,string $album, string $année, int $numero)
+    public function __construct(string $artiste, string $titre, string $genre, int $duree, string $filename,string $album, string $annee, int $numero)
     {
+        parent::__construct($artiste,$titre,$genre,$duree,$filename);
         $this->album = $album;
-        $this->année = $année;
+        $this->annee = $annee;
         $this->numero = $numero;
-        $this->artiste = $artiste;
-        $this->titre = $titre;
-        $this->genre = $genre;
-        $this->filename = $filename;
         $this->duree = $duree;
     }
 

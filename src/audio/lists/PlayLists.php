@@ -4,7 +4,7 @@ class PlayLists extends AudioList
 {
     function __construct(string $nom, AudioList $liste=null)
     {
-        super($nom, $liste);
+        parent::__construct($nom,$liste);
     }
 
     public function add(\iutnc\deefy\audio\tracks\AudioTrack $track)
