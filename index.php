@@ -1,8 +1,10 @@
 <?php
 
 require __DIR__ ."/src/vendor/autoload.php";
-$Dispatcher = new \iutnc\deefy\dispatch\Dispatcher();
 
+session_start();
+
+$Dispatcher = new \iutnc\deefy\dispatch\Dispatcher();
 $Dispatcher->run();
 
 /*

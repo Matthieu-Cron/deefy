@@ -1,6 +1,6 @@
 <?php
 namespace iutnc\deefy\audio\lists;
-class Playlists extends AudioList
+class PlayLists extends AudioList
 {
     function __construct(string $nom, AudioList $liste=null)
     {

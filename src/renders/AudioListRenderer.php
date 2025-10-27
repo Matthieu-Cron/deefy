@@ -11,7 +11,7 @@ class AudioListRenderer implements Renderer
     }
     public function Render(int $selector=self::COMPACT):string
     {
-        $retour=$this->list->nom;
+        $retour="<b>".$this->list->nom."</b>";
         foreach ($this->list as $audio) {
             $retour .= "<br>".$audio.$this->Render(self::COMPACT);
         }
