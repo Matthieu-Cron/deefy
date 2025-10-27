@@ -2,11 +2,9 @@
 
 namespace iutnc\deefy\action;
 
-use iutnc\deefy\action\Action;
 use iutnc\deefy\renders\AudioListRenderer;
-use iutnc\deefy\src\interfaces\render\Renderer;
 
-class DisplayPlaylisteAction extends Action
+class DisplayPlayListeAction extends Action
 {
 
     public function execute(): string
