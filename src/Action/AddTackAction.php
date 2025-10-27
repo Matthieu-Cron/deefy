@@ -27,7 +27,7 @@ class AddTackAction extends Action
                     <input type='text' name='Genre' placeholder='Genre du Track' required>
                     <br>
                     <label>Durée du Track</label>
-                    <input type='number' name='Duree' placeholder='Duree du Track' required>
+                    <input type='number' name='Duree' placeholder='Duree du Track en secondes' required>
                     <br>
                     <button type='submit'>Créer</button>
                 </form>";
