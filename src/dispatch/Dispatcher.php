@@ -6,7 +6,7 @@ use iutnc\deefy\action\Action;
 use iutnc\deefy\action\AddPlaylistAction;
 use iutnc\deefy\action\AddPodcastTackAction;
 use iutnc\deefy\action\DefaultAction;
-use iutnc\deefy\action\DisplayPlaylisteAction;
+use iutnc\deefy\action\DisplayPlayListeAction;
 
 class Dispatcher
 {
@@ -42,7 +42,7 @@ class Dispatcher
     {
         switch ($this->action) {
             case 'playlist':
-                $act = new DisplayPlaylisteAction();
+                $act = new DisplayPlayListeAction();
                 break;
             case 'add-playlist':
                 $act = new AddPlaylistAction();
