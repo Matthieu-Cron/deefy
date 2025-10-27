@@ -28,7 +28,7 @@ body {
   margin: 0;
   padding: 0;
 }
-h2, p {
+h2,h3, p {
   margin: 10px;
 }
 
