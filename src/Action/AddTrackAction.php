@@ -95,7 +95,7 @@ class AddTrackAction extends Action
             $html = "<h2>Nouvelle Playlist en session :</h2>";
             $html .= $renderer->render();
 
-            return $html;
+            return $html; //
         }
     }
 }
