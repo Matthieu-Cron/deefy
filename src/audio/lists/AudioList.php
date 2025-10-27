@@ -28,6 +28,11 @@ class AudioList
         throw new Exception ("$at: invalid property");
     }
 
+    public function getListe():array
+    {
+        return $this->liste;
+    }
+
     public function getTotalTime():int
     {
         $n=0;
