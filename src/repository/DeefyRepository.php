@@ -78,14 +78,20 @@ class DeefyRepository
 
    
    
-   public function recupererToutesPlaylists(): array
-{
+  public function recupererToutesPlaylists(): array {
     $sql = "SELECT * FROM playlist";
     $stmt = $this->pdo->query($sql);
-    $playlists = $stmt->fetchAll();
+    $rows = $stmt->fetchAll();
 
-    return $playlists ?: [];
+    $playlists = [];
+    foreach ($rows as $row) {
+        $pl = new \iutnc\deefy\audio\lists\PlayLists($row['nom']);
+        $pl->id = $row['id'];
+        $playlists[] = $pl;
+    }
+    return $playlists;
 }
+
 
 
     
