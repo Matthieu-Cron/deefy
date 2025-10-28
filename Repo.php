@@ -1,12 +1,12 @@
 <?php
 
-require_once  __DIR__ . '/../../vendor/autoload.php';
+require_once  __DIR__ . '/src/vendor/autoload.php';
 
-\iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/../db.config.ini');
+\iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');
 
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 
-$playlists = $repo->findAllPlaylists();
+$playlists = $repo->recupererToutesPlaylists();
 foreach ($playlists as $pl) {
     print "playlist  : " . $pl->nom . ":". $pl->id . "\n";
 }
