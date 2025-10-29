@@ -1,5 +1,5 @@
 <?php
-
+echo "<a href=/deefy/index.php>Retour</a>";
 require_once  __DIR__ . '/src/vendor/autoload.php';
 
 \iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');

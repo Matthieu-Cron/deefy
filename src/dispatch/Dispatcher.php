@@ -4,7 +4,6 @@ namespace iutnc\deefy\dispatch;
 
 use iutnc\deefy\action\Action;
 use iutnc\deefy\action\AddPlaylistAction;
-use iutnc\deefy\action\AddPodcastTrackAction;
 use iutnc\deefy\action\AddTrackAction;
 use iutnc\deefy\action\AddUserAction;
 use iutnc\deefy\action\DefaultAction;
@@ -62,6 +61,7 @@ h2,h3, p {
             <li><a href='.?action=add-track'>AJOUTER 1 TRACK DANS LA PLAYLIST</a></li>
             <li><a href='.?action=add-user'>Connexion</a></li>
             <li><a href='.'>ACTION PAR DÉFAULT</a></li>
+            <li><a href='/deefy/Repo.php'>RepoTest</a></li>
         </ul>
     <h1>Application deffy</h1>
     ".$html."
