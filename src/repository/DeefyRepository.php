@@ -95,50 +95,109 @@ class DeefyRepository
 
 
     
-    public function sauvegarderPlaylistVide(string $nom, string $description = ''): int
+public function sauvegarderPlaylistVide(\iutnc\deefy\audio\lists\PlayLists $pl): \iutnc\deefy\audio\lists\PlayLists
 {
-    $sql = "INSERT INTO playlist (nom, description) VALUES (:nom, :description)";
+    $sql = "INSERT INTO playlist (nom) VALUES (:nom)";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute([
-        'nom' => $nom,
-        'description' => $description
+        'nom' => $pl->nom
     ]);
 
-    
-    return (int) $this->pdo->lastInsertId();
+    // met à jour l'ID dans l'objet
+    $pl->id = (int) $this->pdo->lastInsertId();
+
+    return $pl;
 }
 
 
-      public function sauvegarderTrack(string $titre, string $artiste, string $album, int $duree): int
+
+
+
+public function sauvegarderTrack(\iutnc\deefy\audio\tracks\AudioTrack $track): \iutnc\deefy\audio\tracks\AudioTrack
 {
-    $sql = "INSERT INTO track (titre, artiste, album, duree)
-            VALUES (:titre, :artiste, :album, :duree)";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->execute([
-        'titre' => $titre,
-        'artiste' => $artiste,
-        'album' => $album,
-        'duree' => $duree
-    ]);
+    if ($track instanceof \iutnc\deefy\audio\tracks\PodcastTrack) {
+        // pour les podcasts : on utilise des valeurs par défaut si la propriété n'existe pas
+        $auteur = property_exists($track, 'auteur') ? $track->auteur : '';
+        $date   = property_exists($track, 'date') ? $track->date : '';
 
-    return (int) $this->pdo->lastInsertId();
-}
-
-
-    public function ajouterTrackAPlaylist(int $playlistID, int $trackId): void 
-    {
-       $checkPlaylist = $this->pdo->prepare("Select id from playlist where id = :id");
-       $checkPlaylist->execute(['id' => $playlistID]);
-
-       $checkTrack = $this->pdo->prepare("Select id from track where id = :id");
-       $checkTrack->execute(['id' => $trackId]);
-
-
-       $sql = "insert into playlist2track (playlist_id, track_id) values (: pid, :tid)";
-       $stmt = $this->pdo->prepare($sql);
-       $stmt->execute(['pid' => $playlistId , 'tid' => $trackId]);
-
-    
-
+        $sql = "INSERT INTO track (titre, genre, duree, filename, type, auteur_podcast, date_posdcast)
+                VALUES (:titre, :genre, :duree, :filename, 'P', :auteur, :date)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'titre'  => $track->titre,
+            'genre'  => $track->genre,
+            'duree'  => $track->duree,
+            'filename' => $track->filename,
+            'auteur' => $auteur,
+            'date'   => $date
+        ]);
+    } else {
+        // pour les tracks audio normales
+        $sql = "INSERT INTO track (titre, genre, duree, filename, type, artiste_album, titre_album, annee_album, numero_album)
+                VALUES (:titre, :genre, :duree, :filename, 'A', :artiste, :album, :annee, :num)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'titre'    => $track->titre,
+            'genre'    => $track->genre,
+            'duree'    => $track->duree,
+            'filename' => $track->filename,
+            'artiste'  => $track->artiste,
+            'album'    => property_exists($track, 'titre_album') ? $track->titre_album : '',
+            'annee'    => property_exists($track, 'annee_album') ? $track->annee_album : 0,
+            'num'      => property_exists($track, 'numero_album') ? $track->numero_album : 0
+        ]);
     }
+
+    $track->id = (int) $this->pdo->lastInsertId();
+    return $track;
+}
+
+
+
+
+ public function ajouterTrackAPlaylist(int $playlistID, int $trackID): void 
+{
+   
+    $stmt = $this->pdo->prepare("SELECT id FROM playlist WHERE id = :id");
+    $stmt->execute(['id' => $playlistID]);
+    if (!$stmt->fetch()) {
+        throw new Exception("Playlist $playlistID introuvable.");
+    }
+
+  
+    $stmt = $this->pdo->prepare("SELECT id FROM track WHERE id = :id");
+    $stmt->execute(['id' => $trackID]);
+    if (!$stmt->fetch()) {
+        throw new Exception("Track $trackID introuvable.");
+    }
+
+    $stmt = $this->pdo->prepare(
+        "SELECT * FROM playlist2track WHERE id_pl = :pid AND id_track = :tid"
+    );
+    $stmt->execute([
+        'pid' => $playlistID,
+        'tid' => $trackID
+    ]);
+    if ($stmt->fetch()) {
+        
+        return;
+    }
+    $stmt = $this->pdo->prepare(
+        "SELECT MAX(no_piste_dans_liste) AS maxNo FROM playlist2track WHERE id_pl = :pid"
+    );
+    $stmt->execute(['pid' => $playlistID]);
+    $row = $stmt->fetch();
+    $nextNo = $row['maxNo'] ? $row['maxNo'] + 1 : 1;
+
+    $sql = "INSERT INTO playlist2track (id_pl, id_track, no_piste_dans_liste) VALUES (:pid, :tid, :no)";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        'pid' => $playlistID,
+        'tid' => $trackID,
+        'no'  => $nextNo
+    ]);
+}
+
+
+
 }
