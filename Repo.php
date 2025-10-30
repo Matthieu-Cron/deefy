@@ -1,11 +1,19 @@
 <?php
+
+use iutnc\deefy\auth\AuthnException;
+
 echo "<a href=/deefy/index.php>Retour</a><br>";
 require_once  __DIR__ . '/src/vendor/autoload.php';
 
 \iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');
 
 $test = new \iutnc\deefy\auth\AuthnProvider();
-$test->signin("user1@mail.com","user1");
+try{
+    $test->signin("user1@mail.com","user1");
+}
+catch(AuthnException $e){
+    echo $e->getMessage();
+}
 /*
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 

@@ -8,6 +8,7 @@ use iutnc\deefy\action\AddTrackAction;
 use iutnc\deefy\action\AddUserAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlayListeAction;
+use iutnc\deefy\Action\signinAction;
 
 class Dispatcher
 {
@@ -59,7 +60,8 @@ h2,h3, p {
             <li><a href='.?action=playlist'>AFFICHER LA PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-playlist'>CREER 1 PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-track'>AJOUTER 1 TRACK DANS LA PLAYLIST</a></li>
-            <li><a href='.?action=add-user'>Connexion</a></li>
+            <li><a href='.?action=add-user'>Ajouter un utlisateur</a></li>
+            <li><a href='.?action=SigninAction'>Connexion</a></li>
             <li><a href='.'>ACTION PAR DÉFAULT</a></li>
             <li><a href='/deefy/Repo.php'>RepoTest</a></li>
         </ul>
@@ -82,6 +84,9 @@ h2,h3, p {
                 break;
             case 'add-user':
                 $act = new AddUserAction();
+                break;
+            case 'SigninAction':
+                $act = new SigninAction();
                 break;
             default:
                 $act = new DefaultAction();

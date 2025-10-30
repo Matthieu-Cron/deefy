@@ -14,20 +14,16 @@ class AuthnProvider
 
     public function signin(string $username, string $password): void
     {
-        echo "<p>test de : ".$username." avec le mot de passe: ".$password."<br>";
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        echo "test de : ".$username." avec le mot de passe: ".$password."</p><br>";
         $res = false;
         foreach ($this->users as $user) {
-            if($user->getEmail() === $username && $user->getPassword() === $password) {
-                $res = true;
+            if($user->getEmail() === $username) {
+                if(password_verify($password, $user->getPassword())) {
+                    $res = true;
+                }
             }
         }
-        if($res) {
-            echo "<p>Conection réusie</p>";
-        }
-        else {
-            echo "<p>Conection impossible</p>";
+        if(!$res) {
+            throw new AuthnException();
         }
     }
 }
