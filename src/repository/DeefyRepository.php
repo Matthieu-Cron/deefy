@@ -88,6 +88,13 @@ class DeefyRepository
        }
        return $utilisateurs;
    }
+
+   public function inscriptionUtilisateur(string $email, string $password):void
+   {
+       $sql = "INSERT INTO User (email,passwd) VALUES ('$email','$password');";
+       $stmt = $this->pdo->prepare($sql);
+       $stmt->execute();
+   }
    
   public function recupererToutesPlaylists(): array {
     $sql = "SELECT * FROM playlist";

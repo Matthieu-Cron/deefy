@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy\action;
+namespace iutnc\deefy\Action;
 
 use iutnc\deefy\audio\tracks\AudioTrack;
 use iutnc\deefy\renders\AudioListRenderer;
@@ -18,7 +18,7 @@ class AddTrackAction extends Action
 
             $html = "<form method='post' action='?action=add-track' enctype='multipart/form-data'>
                 <label>Nom de l'artiste :</label>
-                <input type='text' name='Artiste' placeholder='Nom de l'artiste' required><br>
+                <input type='text' name='Artiste' placeholder=\"Nom de l'artiste\" required><br>
 
                 <label>Titre de Track :</label>
                 <input type='text' name='Titre' placeholder='Titre du Track' required><br>

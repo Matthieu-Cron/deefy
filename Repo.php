@@ -9,7 +9,14 @@ require_once  __DIR__ . '/src/vendor/autoload.php';
 
 $test = new \iutnc\deefy\auth\AuthnProvider();
 try{
-    $test->signin("user1@mail.com","user1");
+    if($test->register("user5@mail.com","1234567890")){
+        echo "<h2>register complete</h2>";
+    }
+    else
+    {
+        echo "<h2>failed to register</h2>";
+    }
+
 }
 catch(AuthnException $e){
     echo $e->getMessage();

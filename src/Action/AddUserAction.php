@@ -1,8 +1,9 @@
 <?php
 
-namespace iutnc\deefy\action;
+namespace iutnc\deefy\Action;
 
 use iutnc\deefy\action\Action;
+use iutnc\deefy\auth\AuthnProvider;
 
 class AddUserAction extends Action
 {
@@ -11,29 +12,40 @@ class AddUserAction extends Action
     {
         if($this->http_method === 'GET'){
             $html = "<form method='post' action='?action=add-user'>
-                <label>Nom : </label>
-                <input type='text' name='Nom' placeholder=\"Nom de l'utilisateur\">
-                <label>Email :<label>
-                <input type='email' name='Email' placeholder=\"Email de l'utilisateur\">
-                <label>Âge : </label>
-                <input type='number' name='Age' placeholder=\"Âge de l'utilisateur\">
+                <label>Mail : </label>
+                <input type='email' name='Mail' placeholder=\"Nom de l'utilisateur\"><br>
+                <label>Mot de passe :<label>
+                <input type='password' name='MotDePasse' placeholder=\"Email de l'utilisateur\"><br>
+                <label>Confirmation du mot de passe : </label>
+                <input type='password' name='Confirmation' placeholder=\"Âge de l'utilisateur\">
                 <button type='submit'>Connection</button>";
         }
         else
         {
-            if(!isset($_POST['Nom']) || trim($_POST['Nom']) == ''){
-                return "<p>Erreur : Le nom est obligatoire</p>";
-            }
-            if(!isset($_POST['Email']) || trim($_POST['Email']) == ''){
+            if(!isset($_POST['Mail']) || trim($_POST['Mail']) == ''){
                 return "<p>Erreur : L'email est obligatoire</p>";
             }
-            if(!isset($_POST['Age']) || trim($_POST['Age']) == ''){
-                return "<p>Erreur : L'age est obligatoire</p>";
+            if(!isset($_POST['MotDePasse']) || trim($_POST['MotDePasse']) == ''){
+                return "<p>Erreur : Le mot de passe est obligatoire</p>";
             }
-            $nom = filter_var($_POST['Nom'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $email = filter_var($_POST['Email'],FILTER_SANITIZE_EMAIL);
-            $age = filter_var($_POST['Age'],FILTER_SANITIZE_NUMBER_INT);
-            $html = "Nom : ".$nom."<br>Email : ".$email."<br>Age : ".$age;
+            if(!isset($_POST['Confirmation']) || trim($_POST['Confirmation']) == ''){
+                return "<p>Erreur : Le mot de passe obligatoire</p>";
+            }
+            $email = filter_var($_POST['Mail'],FILTER_SANITIZE_EMAIL);
+            $MotDePasse = filter_var($_POST['MotDePasse'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $Confirmation = filter_var($_POST['Confirmation'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if(!($MotDePasse === $Confirmation)){
+                return "<p>Les deux mot de passe doivent être identique</p>";
+            }
+            $AuthnProvider = new AuthnProvider();
+            if($AuthnProvider->register($email, $MotDePasse))
+            {
+                $html = "<h2>Inscripation réussie.</h2>";
+            }
+            else
+            {
+                $html = "<p>Erreur lors de l'inscription</p>";
+            }
         }
         return $html;
     }

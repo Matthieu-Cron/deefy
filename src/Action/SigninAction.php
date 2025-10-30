@@ -21,9 +21,9 @@ class SigninAction extends Action
                 $html = "
             <form action='.?action=signinAction' method='POST'>
             <label>Utilisateur</label>
-            <input type='text' name='Username'>
+            <input type='text' name='Username'><br>
             <label>Mot de passe</label>
-            <input type='password' name='Password'>
+            <input type='password' name='Password'><br>
             <button type='submit'>Connexion</button>
             </form>";
             }
