@@ -4,6 +4,9 @@ require_once  __DIR__ . '/src/vendor/autoload.php';
 
 \iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');
 
+$test = new \iutnc\deefy\auth\AuthnProvider();
+$test->signin("user1@mail.com","user1");
+/*
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 
 $playlists = $repo->recupererToutesPlaylists();
@@ -23,5 +26,5 @@ print "track 2 : " . $track->titre . ":". get_class($track). "<br>";
 $repo->ajouterTrackAPlaylist($pl->id, $track->id);
 $track2 = new \iutnc\deefy\audio\tracks\PodcastTrack('2021-01-01', 'auteur', 'test', 'genre', 10, 'test2.mp3');
 $track2 = $repo->sauvegarderTrack($track);
-$repo->ajouterTrackAPlaylist($pl->id, $track2->id);
+$repo->ajouterTrackAPlaylist($pl->id, $track2->id);*/
 

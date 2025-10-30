@@ -2,6 +2,7 @@
 
 namespace iutnc\deefy\repository;
 
+use iutnc\deefy\auth\User;
 use PDO;
 use PDOException;
 use Exception;
@@ -76,7 +77,17 @@ class DeefyRepository
         return $this->pdo;
     }
 
-   
+   public function recupereTousUtilisateurs():array
+   {
+       $sql = "SELECT id,email,passwd FROM User;";
+       $stmt = $this->pdo->query($sql);
+       $rows = $stmt->fetchAll();
+       $utilisateurs = [];
+       foreach ($rows as $row) {
+           $utilisateurs[] = new User($row['id'], $row['email'], $row['passwd']);
+       }
+       return $utilisateurs;
+   }
    
   public function recupererToutesPlaylists(): array {
     $sql = "SELECT * FROM playlist";
