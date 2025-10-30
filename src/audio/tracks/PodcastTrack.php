@@ -9,9 +9,9 @@ class PodcastTrack extends \iutnc\deefy\audio\tracks\AudioTrack
     /**
      * @param String $date
      */
-    public function __construct(string $date,string $artiste, string $titre, string $genre, int $duree, string $filename)
+    public function __construct(string $date,string $artiste, string $titre, string $genre, int $duree, string $filename, int $id=0)
     {
-        parent::__construct($artiste,$titre,$genre,$duree,$filename);
+        parent::__construct($artiste,$titre,$genre,$duree,$filename,$id);
         $this->date = $date;
     }
 

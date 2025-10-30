@@ -85,8 +85,7 @@ class DeefyRepository
 
     $playlists = [];
     foreach ($rows as $row) {
-        $pl = new \iutnc\deefy\audio\lists\PlayLists($row['nom']);
-        $pl->id = $row['id'];
+        $pl = new \iutnc\deefy\audio\lists\PlayLists($row['nom'],$row['id']);
         $playlists[] = $pl;
     }
     return $playlists;
@@ -104,7 +103,7 @@ public function sauvegarderPlaylistVide(\iutnc\deefy\audio\lists\PlayLists $pl):
     ]);
 
     // met à jour l'ID dans l'objet
-    $pl->id = (int) $this->pdo->lastInsertId();
+    $pl->setId((int) $this->pdo->lastInsertId());
 
     return $pl;
 }
@@ -148,7 +147,7 @@ public function sauvegarderTrack(\iutnc\deefy\audio\tracks\AudioTrack $track): \
         ]);
     }
 
-    $track->id = (int) $this->pdo->lastInsertId();
+    $track->setId((int) $this->pdo->lastInsertId());
     return $track;
 }
 

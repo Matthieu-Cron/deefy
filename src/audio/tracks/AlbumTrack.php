@@ -12,9 +12,9 @@ class AlbumTrack extends \iutnc\deefy\audio\tracks\AudioTrack {
      * @param string $annee
      * @param int $numero
      */
-    public function __construct(string $artiste, string $titre, string $genre, int $duree, string $filename,string $album, string $annee, int $numero)
+    public function __construct(string $artiste, string $titre, string $genre, int $duree, string $filename,string $album, string $annee, int $numero,int $id=0)
     {
-        parent::__construct($artiste,$titre,$genre,$duree,$filename);
+        parent::__construct($artiste,$titre,$genre,$duree,$filename,$id);
         $this->album = $album;
         $this->annee = $annee;
         $this->numero = $numero;

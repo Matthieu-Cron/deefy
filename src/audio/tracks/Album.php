@@ -9,9 +9,9 @@ class Album extends AudioList
     private string $album;
     private string $date;
 
-    function __construct(string $nom,string $artist,string $album,string $date,AudioList $liste=null)
+    function __construct(string $nom,string $artist,string $album,string $date,int $id=0,AudioTrack $liste=null)
     {
-        parent::__construct($nom,$liste);
+        parent::__construct($nom,$id,$liste);
         $this->artist = $artist;
         $this->album = $album;
         $this->date = $date;

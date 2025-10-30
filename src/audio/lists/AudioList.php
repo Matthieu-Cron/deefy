@@ -5,10 +5,11 @@ use iutnc\deefy\audio\tracks\AudioTrack;
 
 class AudioList
 {
+    protected int $id;
     protected string $nom;
     protected array $liste;
 
-    function __construct(string $nom, AudioList $liste=null)
+    function __construct(string $nom, int $id=0,AudioTrack $liste=null)
     {
         $this->nom = $nom;
         if($liste != null){
@@ -18,6 +19,11 @@ class AudioList
         {
             $this->liste = [];
         }
+        $this->id = $id;
+    }
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
     public function add(AudioTrack $track)
     {

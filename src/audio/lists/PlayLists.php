@@ -4,9 +4,9 @@ use iutnc\deefy\audio\tracks\AudioTrack;
 
 class PlayLists extends AudioList
 {
-    function __construct(string $nom, AudioList $liste=null)
+    function __construct(string $nom,int $id = 0,AudioTrack $liste=null)
     {
-        parent::__construct($nom,$liste);
+        parent::__construct($nom,$id,$liste);
     }
     public function remove(int $index)
     {

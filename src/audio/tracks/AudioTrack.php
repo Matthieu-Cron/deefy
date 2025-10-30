@@ -3,6 +3,7 @@ namespace iutnc\deefy\audio\tracks;
 use Exception;
 
 Class AudioTrack{
+    protected int $id = 0;
     protected string $titre;
     protected string $artiste;
     protected string $genre;
@@ -16,8 +17,9 @@ Class AudioTrack{
      * @param int $duree
      * @param string $filename
      */
-    public function __construct(string $artiste, string $titre, string $genre, int $duree, string $filename)
+    public function __construct(string $artiste, string $titre, string $genre, int $duree, string $filename,$id=0)
     {
+        $this->id=$id;
         $this->artiste = $artiste;
         $this->titre = $titre;
         $this->genre = $genre;
@@ -25,6 +27,10 @@ Class AudioTrack{
         $this->filename = $filename;
     }
 
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
     public function __get(string $at):mixed {
         if (property_exists ($this, $at)) return $this->$at;
         throw new Exception ("$at: invalid property");

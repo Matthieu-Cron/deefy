@@ -1,5 +1,5 @@
 <?php
-echo "<a href=/deefy/index.php>Retour</a>";
+echo "<a href=/deefy/index.php>Retour</a><br>";
 require_once  __DIR__ . '/src/vendor/autoload.php';
 
 \iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');
@@ -21,4 +21,7 @@ $track = new \iutnc\deefy\audio\tracks\PodcastTrack('2021-01-01', 'auteur', 'tes
 $track = $repo->sauvegarderTrack($track);
 print "track 2 : " . $track->titre . ":". get_class($track). "<br>";
 $repo->ajouterTrackAPlaylist($pl->id, $track->id);
+$track2 = new \iutnc\deefy\audio\tracks\PodcastTrack('2021-01-01', 'auteur', 'test', 'genre', 10, 'test2.mp3');
+$track2 = $repo->sauvegarderTrack($track);
+$repo->ajouterTrackAPlaylist($pl->id, $track2->id);
 
