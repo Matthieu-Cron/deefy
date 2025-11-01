@@ -99,6 +99,9 @@ class DeefyRepository
        $stmt = $this->pdo->prepare($sql);
        $stmt->execute(['id' => $id]);
        $row = $stmt->fetch();
+       if($row == null){
+           throw new Exception("La playlist n'existe pas");
+       }
        $nom = $row['nom'];
        $stmt->closeCursor();
        $playlist = new PlayLists($nom,$id);
@@ -114,11 +117,11 @@ class DeefyRepository
            $row = $stmt->fetch();
 
            if ($row['type'] == 'P') {
-               $track = new PodcastTrack($row['date_poscast'],$row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$track['id']);
+               $track = new PodcastTrack($row['date_posdcast'],(string)$row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$row['id']);
            } elseif ($row['titre_album'] != null or $row['annee_album'] != null or $row['numero_album'] != null) {
                $track = new AlbumTrack($row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$row['titre_album'],$row['annee_album'],$row['numero_album'],$row['id']);
            } else {
-               $track = new AudioTrack($row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$track['id']);
+               $track = new AudioTrack($row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$row['id']);
            }
            $stmt->closeCursor();
            $playlist->add($track);

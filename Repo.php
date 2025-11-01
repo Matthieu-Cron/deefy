@@ -10,7 +10,7 @@ require_once  __DIR__ . '/src/vendor/autoload.php';
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 $test = new \iutnc\deefy\auth\AuthnProvider();
 try{
-    $test = $repo->findPlaylistById(1);
+    $test = $repo->findPlaylistById(5);
     $render = new AudioListRenderer($test);
     echo $render->render();
 }
