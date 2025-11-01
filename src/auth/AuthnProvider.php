@@ -23,12 +23,19 @@ class AuthnProvider
         foreach ($this->users as $user) {
             if($user->getEmail() === $username) {
                 if(password_verify($password, $user->getPassword())) {
+                    $conecte = $user;
                     $res = true;
                 }
             }
         }
         if(!$res) {
             throw new AuthnException();
+        }
+        else
+        {
+            $_SESSION['User_id'] = $conecte->getId();
+            $_SESSION['User_emali'] = $conecte->getEmail();
+            $_SESSION['User_role'] = $conecte->getRole();
         }
     }
 

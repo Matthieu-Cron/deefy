@@ -83,12 +83,12 @@ class DeefyRepository
 
    public function recupereTousUtilisateurs():array
    {
-       $sql = "SELECT id,email,passwd FROM User;";
+       $sql = "SELECT id,email,passwd,role FROM User;";
        $stmt = $this->pdo->query($sql);
        $rows = $stmt->fetchAll();
        $utilisateurs = [];
        foreach ($rows as $row) {
-           $utilisateurs[] = new User($row['id'], $row['email'], $row['passwd']);
+           $utilisateurs[] = new User($row['id'], $row['email'], $row['passwd'], $row['role']);
        }
        return $utilisateurs;
    }
@@ -131,7 +131,7 @@ class DeefyRepository
    }
    public function inscriptionUtilisateur(string $email, string $password):void
    {
-       $sql = "INSERT INTO User (email,passwd) VALUES ('$email','$password');";
+       $sql = "INSERT INTO User (email,passwd,role) VALUES ('$email','$password','1');";
        $stmt = $this->pdo->prepare($sql);
        $stmt->execute();
    }

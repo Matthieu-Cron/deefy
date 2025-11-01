@@ -35,12 +35,12 @@ class AddUserAction extends Action
             $MotDePasse = filter_var($_POST['MotDePasse'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $Confirmation = filter_var($_POST['Confirmation'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!($MotDePasse === $Confirmation)){
-                return "<p>Les deux mot de passe doivent être identique</p>";
+                return "<p>Les deux mots de passe doivent être identique</p>";
             }
             $AuthnProvider = new AuthnProvider();
             if($AuthnProvider->register($email, $MotDePasse))
             {
-                $html = "<h2>Inscripation réussie.</h2>";
+                $html = "<h2>Inscription réussie.</h2>";
             }
             else
             {

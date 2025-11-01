@@ -1,12 +1,17 @@
 <?php
 
 use iutnc\deefy\auth\AuthnException;
+use iutnc\deefy\auth\Authz;
 use iutnc\deefy\renders\AudioListRenderer;
+use iutnc\deefy\repository\DeefyRepository;
 
 echo "<a href=/deefy/index.php>Retour</a><br>";
 require_once  __DIR__ . '/src/vendor/autoload.php';
 
-\iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');
+DeefyRepository::setConfig(__DIR__ . '/db.config');
+$test = new Authz();
+
+/*
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 $test = new \iutnc\deefy\auth\AuthnProvider();
 try{
@@ -17,7 +22,7 @@ try{
 catch(Exception $e){
     echo $e->getMessage();
 }
-/*
+
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 
 $playlists = $repo->recupererToutesPlaylists();

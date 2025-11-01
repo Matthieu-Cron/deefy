@@ -13,13 +13,13 @@ class SigninAction extends Action
     {
         $html= "";
         if(!($this->http_method === 'POST')){
-            if(isset($_SESSION["Username"]))
+            if(isset($_SESSION["User_id"]))
             {
-                $html = "<h2>Connection Réussie Grâce à la session</h2><br><p>L'utilisateur : ".$_SESSION["Username"]."est connecté</p>";
+                $html = "<h2>Connection Réussie Grâce à la session</h2><br><p>L'utilisateur : ".$_SESSION['User_id']."<br>".$_SESSION['User_emali']."<br>".$_SESSION['User_role']."<br>Est connecté</p>";
             }
             else{
                 $html = "
-            <form action='.?action=signinAction' method='POST'>
+            <form action='.?action=SigninAction' method='POST'>
             <label>Utilisateur</label>
             <input type='text' name='Username'><br>
             <label>Mot de passe</label>
@@ -40,8 +40,7 @@ class SigninAction extends Action
             catch (AuthnException $e){
                 $html = "<p>".$e->getMessage()."</p>";
             }
-            $_SESSION["Username"] = $username;
-            $html = "<h2>Connection Réussie</h2><br><p>L'utilisateur : ".$username."est connecté</p>";
+            $html = "<h2>Connection Réussie</h2><br><p><br><p>L'utilisateur : ".$_SESSION['User_id']."<br>".$_SESSION['User_emali']."<br>".$_SESSION['User_role']."<br>Est connecté</p>";
         }
         return $html;
     }
