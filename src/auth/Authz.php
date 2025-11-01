@@ -7,13 +7,14 @@ use mysql_xdevapi\Exception;
 
 class Authz
 {
+    private const ROLEADMIN = 100; //corespond au nombre corespondant à l'admin
     private $user2playlist;
     private $repo;
     public function __construct()
     {
         DeefyRepository::setConfig(__DIR__ . '/../../db.config');
         $this->repo = DeefyRepository::getInstance();
-        $this->user2playlist = $this->repo->recupereTousUtilisateurs();
+        $this->user2playlist = $this->repo->recupereTousAutorisationsPlaylists();
     }
 
     public function checkRole(int $role):bool
@@ -32,17 +33,21 @@ class Authz
     {
         if(!isset($_SESSION['User_id']))
         {
-            throw new Exception('Veuillez vous connecter au serveur');
+            $res=0;
         }
         else
         {
-            $res ="flase";
+            $res =0;
             foreach ($this->user2playlist as $user)
             {
                 if(($user['id_user'] == $_SESSION['User_id'])and ($user['id_pl'] == $playlist_id))
                 {
-                    $res = "true";
+                    $res = 1;
                 }
+            }
+            if(!$res)
+            {
+                $res = $this->checkRole(self::ROLEADMIN);
             }
         }
         return $res;

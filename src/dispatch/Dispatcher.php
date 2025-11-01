@@ -57,7 +57,7 @@ h2,h3, p {
 </style>
 <body>
         <ul class='navbar'>
-            <li><a href='.?action=playlist'>AFFICHER LA PLAYLIST EN SESSION</a></li>
+            <li><a href='.?action=playlist&id=1'>AFFICHER LA PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-playlist'>CREER 1 PLAYLIST EN SESSION</a></li>
             <li><a href='.?action=add-track'>AJOUTER 1 TRACK DANS LA PLAYLIST</a></li>
             <li><a href='.?action=add-user'>Ajouter un utlisateur</a></li>

@@ -15,7 +15,7 @@ class SigninAction extends Action
         if(!($this->http_method === 'POST')){
             if(isset($_SESSION["User_id"]))
             {
-                $html = "<h2>Connection Réussie Grâce à la session</h2><br><p>L'utilisateur : ".$_SESSION['User_id']."<br>".$_SESSION['User_emali']."<br>".$_SESSION['User_role']."<br>Est connecté</p>";
+                $html = "<h2>Connection Réussie Grâce à la session</h2><br><p>L'utilisateur est connecté avec les informations :<ul><li>ID : ".$_SESSION['User_id']."</li><li> mail : ".$_SESSION['User_emali']."</li><li>Rôle : ".$_SESSION['User_role']."</li></ul></p>";
             }
             else{
                 $html = "
@@ -40,7 +40,7 @@ class SigninAction extends Action
             catch (AuthnException $e){
                 $html = "<p>".$e->getMessage()."</p>";
             }
-            $html = "<h2>Connection Réussie</h2><br><p><br><p>L'utilisateur : ".$_SESSION['User_id']."<br>".$_SESSION['User_emali']."<br>".$_SESSION['User_role']."<br>Est connecté</p>";
+            $html = "<h2>Connection Réussie</h2><br><p><br><p>L'utilisateur est connecté avec les informations :<ul><li>ID : ".$_SESSION['User_id']."</li><li> mail : ".$_SESSION['User_emali']."</li><li>Rôle : ".$_SESSION['User_role']."</li></ul></p>";
         }
         return $html;
     }

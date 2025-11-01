@@ -93,6 +93,14 @@ class DeefyRepository
        return $utilisateurs;
    }
 
+   public function recupereTousAutorisationsPlaylists():array
+   {
+       $sql="SELECT * from user2playlist;";
+       $stmt = $this->pdo->query($sql);
+       $rows = $stmt->fetchAll();
+       return $rows;
+   }
+
    public function findPlaylistById(int $id): Playlists
    {
        $sql = "SELECT nom from Playlist WHERE id = :id";

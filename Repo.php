@@ -10,7 +10,13 @@ require_once  __DIR__ . '/src/vendor/autoload.php';
 
 DeefyRepository::setConfig(__DIR__ . '/db.config');
 $test = new Authz();
-
+try {
+    $test->checkPlaylistOwner(1);
+}
+catch (Exception $e)
+{
+    echo $e->getMessage();
+}
 /*
 $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 $test = new \iutnc\deefy\auth\AuthnProvider();
