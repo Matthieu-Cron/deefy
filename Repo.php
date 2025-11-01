@@ -1,24 +1,20 @@
 <?php
 
 use iutnc\deefy\auth\AuthnException;
+use iutnc\deefy\renders\AudioListRenderer;
 
 echo "<a href=/deefy/index.php>Retour</a><br>";
 require_once  __DIR__ . '/src/vendor/autoload.php';
 
 \iutnc\deefy\repository\DeefyRepository::setConfig(__DIR__ . '/db.config');
-
+$repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
 $test = new \iutnc\deefy\auth\AuthnProvider();
 try{
-    if($test->register("user5@mail.com","1234567890")){
-        echo "<h2>register complete</h2>";
-    }
-    else
-    {
-        echo "<h2>failed to register</h2>";
-    }
-
+    $test = $repo->findPlaylistById(1);
+    $render = new AudioListRenderer($test);
+    echo $render->render();
 }
-catch(AuthnException $e){
+catch(Exception $e){
     echo $e->getMessage();
 }
 /*

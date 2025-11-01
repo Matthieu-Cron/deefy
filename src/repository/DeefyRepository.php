@@ -2,6 +2,10 @@
 
 namespace iutnc\deefy\repository;
 
+use iutnc\deefy\audio\lists\PlayLists;
+use iutnc\deefy\audio\tracks\AlbumTrack;
+use iutnc\deefy\audio\tracks\AudioTrack;
+use iutnc\deefy\audio\tracks\PodcastTrack;
 use iutnc\deefy\auth\User;
 use PDO;
 use PDOException;
@@ -89,6 +93,39 @@ class DeefyRepository
        return $utilisateurs;
    }
 
+   public function findPlaylistById(int $id): Playlists
+   {
+       $sql = "SELECT nom from Playlist WHERE id = :id";
+       $stmt = $this->pdo->prepare($sql);
+       $stmt->execute(['id' => $id]);
+       $row = $stmt->fetch();
+       $nom = $row['nom'];
+       $stmt->closeCursor();
+       $playlist = new PlayLists($nom,$id);
+       $sql = "SELECT id_track FROM playlist2track WHERE id_pl = :id";
+       $stmt = $this->pdo->prepare($sql);
+       $stmt->execute(['id' => $id]);
+       $tracks = $stmt->fetchAll();
+       $stmt->closeCursor();
+       $sql = "SELECT * FROM track WHERE id = :id";
+       $stmt = $this->pdo->prepare($sql);
+       foreach ($tracks as $track) {
+           $stmt->execute(['id' => $track['id_track']]);
+           $row = $stmt->fetch();
+
+           if ($row['type'] == 'P') {
+               $track = new PodcastTrack($row['date_poscast'],$row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$track['id']);
+           } elseif ($row['titre_album'] != null or $row['annee_album'] != null or $row['numero_album'] != null) {
+               $track = new AlbumTrack($row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$row['titre_album'],$row['annee_album'],$row['numero_album'],$row['id']);
+           } else {
+               $track = new AudioTrack($row['artiste_album'],$row['titre'],$row['genre'],$row['duree'],$row['filename'],$track['id']);
+           }
+           $stmt->closeCursor();
+           $playlist->add($track);
+       }
+       return $playlist;
+
+   }
    public function inscriptionUtilisateur(string $email, string $password):void
    {
        $sql = "INSERT INTO User (email,passwd) VALUES ('$email','$password');";

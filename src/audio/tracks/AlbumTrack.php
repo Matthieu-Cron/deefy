@@ -18,7 +18,6 @@ class AlbumTrack extends \iutnc\deefy\audio\tracks\AudioTrack {
         $this->album = $album;
         $this->annee = $annee;
         $this->numero = $numero;
-        $this->duree = $duree;
     }
 
     public function __get(string $at):mixed {
