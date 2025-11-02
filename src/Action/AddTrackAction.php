@@ -4,17 +4,18 @@ namespace iutnc\deefy\Action;
 
 use iutnc\deefy\audio\tracks\AudioTrack;
 use iutnc\deefy\renders\AudioListRenderer;
+use iutnc\deefy\repository\DeefyRepository;
 
 class AddTrackAction extends Action
 {
     public function execute(): string
     {
-        if (!isset($_SESSION['PlayList'])) {
+        if (!isset($_SESSION['PlaylistSession'])) {
             return "<h2>Pas de playlist en session</h2>";
         }
 
         if ($this->http_method === 'GET') {
-            $pl = unserialize($_SESSION['PlayList']);
+            $pl = unserialize($_SESSION['PlaylistSession']);
 
             $html = "<form method='post' action='?action=add-track' enctype='multipart/form-data'>
                 <label>Nom de l'artiste :</label>
@@ -94,9 +95,13 @@ class AddTrackAction extends Action
             $track = new AudioTrack($artiste, $titre, $genre, $duree, 'src/sons/' . $randomName);
 
            
-            $pl = unserialize($_SESSION['PlayList']);
+            $pl = unserialize($_SESSION['PlaylistSession']);
+            DeefyRepository::setConfig(__DIR__."/../../db.config");
+            $repo = DeefyRepository::getInstance();
+            $repo->sauvegarderTrack($track);
+            $repo->ajouterTrackAPlaylist($pl->id,$track->id);
             $pl->add($track);
-            $_SESSION['PlayList'] = serialize($pl);
+            $_SESSION['PlaylistSession'] = serialize($pl);
 
             
             $renderer = new AudioListRenderer($pl);

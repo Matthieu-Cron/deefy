@@ -81,7 +81,16 @@ class DeefyRepository
         return $this->pdo;
     }
 
-   public function recupereTousUtilisateurs():array
+   public function droitsSurPlaylistVideEnSession()
+   {
+       $pl = unserialize($_SESSION['PlaylistSession']);
+       $pl=(int)$pl->id;
+       $user = (int)$_SESSION['User_id'];
+       $sql="Insert into user2playlist (id_user,id_pl) values (".$user.",".$pl.");";
+       $this->pdo->exec($sql);
+
+   }
+    public function recupereTousUtilisateurs():array
    {
        $sql = "SELECT id,email,passwd,role FROM User;";
        $stmt = $this->pdo->query($sql);

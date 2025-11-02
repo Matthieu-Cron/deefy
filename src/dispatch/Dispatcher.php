@@ -8,6 +8,7 @@ use iutnc\deefy\action\AddTrackAction;
 use iutnc\deefy\action\AddUserAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlayListeAction;
+use iutnc\deefy\Action\MesPlaylisteAction;
 use iutnc\deefy\Action\signinAction;
 
 class Dispatcher
@@ -20,6 +21,13 @@ class Dispatcher
 
     private function renderPage(string $html):void
     {
+        if(isset($_SESSION['IdPlaylistSession']))
+        {
+            $idpl=$_SESSION['IdPlaylistSession'];
+        }
+        else{
+            $idpl=0;
+        }
         $res="<html lang=\"fr\">
 <head>
     <meta charset=\"UTF-8\">
@@ -54,18 +62,22 @@ h2,h3, p {
 .navbar li a:hover {
   background-color: lightgray;
 }
+.navbar h1{
+color: white;
+text-align: center;
+}
 </style>
 <body>
         <ul class='navbar'>
-            <li><a href='.?action=playlist&id=1'>AFFICHER LA PLAYLIST EN SESSION</a></li>
-            <li><a href='.?action=add-playlist'>CREER 1 PLAYLIST EN SESSION</a></li>
-            <li><a href='.?action=add-track'>AJOUTER 1 TRACK DANS LA PLAYLIST</a></li>
-            <li><a href='.?action=add-user'>Ajouter un utlisateur</a></li>
-            <li><a href='.?action=SigninAction'>Connexion</a></li>
-            <li><a href='.'>ACTION PAR DÉFAULT</a></li>
-            <li><a href='/deefy/Repo.php'>RepoTest</a></li>
+        <h1>Application deffy</h1>
+            <li><a href='.?action=Mes-playlist'>Mes playlists</a></li>
+            <li><a href='.?action=add-track'>Ajouter une piste</a></li>
+            <li><a href='.?action=add-playlist'>Créer une playlist vide</a></li>
+            <li><a href='.?action=playlist&id=".$idpl."'>Afficher la playlist en courante</a></li>
+            <li><a href='.?action=add-user'>S’inscrire</a></li>
+            <li><a href='.?action=SigninAction'>S’authentifier</a></li>
         </ul>
-    <h1>Application deffy</h1>
+    
     ".$html."
 </body>";
         echo $res;
@@ -87,6 +99,9 @@ h2,h3, p {
                 break;
             case 'SigninAction':
                 $act = new SigninAction();
+                break;
+            case 'Mes-playlist':
+                $act = new MesPlaylisteAction();
                 break;
             default:
                 $act = new DefaultAction();
