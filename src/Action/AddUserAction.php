@@ -12,11 +12,11 @@ class AddUserAction extends Action
         if($this->http_method === 'GET'){
             $html = "<form method='post' action='?action=add-user'>
                 <label>Mail : </label>
-                <input type='email' name='Mail' placeholder=\"Nom de l'utilisateur\"><br>
+                <input type='email' name='Mail' placeholder=\"Mail de l'utilisateur\"><br>
                 <label>Mot de passe :<label>
-                <input type='password' name='MotDePasse' placeholder=\"Email de l'utilisateur\"><br>
+                <input type='password' name='MotDePasse' placeholder=\"Mot de l'utilisateur\"><br>
                 <label>Confirmation du mot de passe : </label>
-                <input type='password' name='Confirmation' placeholder=\"Âge de l'utilisateur\">
+                <input type='password' name='Confirmation' placeholder=\"Confirmation du mot de l'utilisateur\">
                 <button type='submit'>Connection</button>";
         }
         else
