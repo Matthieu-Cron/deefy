@@ -2,12 +2,12 @@
 
 namespace iutnc\deefy\dispatch;
 
-use iutnc\deefy\action\Action;
-use iutnc\deefy\action\AddPlaylistAction;
-use iutnc\deefy\action\AddTrackAction;
-use iutnc\deefy\action\AddUserAction;
-use iutnc\deefy\action\DefaultAction;
-use iutnc\deefy\action\DisplayPlayListeAction;
+use iutnc\deefy\Action\Action;
+use iutnc\deefy\Action\AddPlaylistAction;
+use iutnc\deefy\Action\AddTrackAction;
+use iutnc\deefy\Action\AddUserAction;
+use iutnc\deefy\Action\DefaultAction;
+use iutnc\deefy\Action\DisplayPlayListeAction;
 use iutnc\deefy\Action\MesPlaylisteAction;
 use iutnc\deefy\Action\signinAction;
 
