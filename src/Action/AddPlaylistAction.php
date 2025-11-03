@@ -39,7 +39,6 @@ class AddPlaylistAction extends Action
                 $repo = DeefyRepository::getInstance();
                 $playlist = $repo->sauvegarderPlaylistVide($playlist);
                 $_SESSION['PlaylistSession'] = serialize($playlist);
-                echo "Test d'id : ".$playlist->id;
                 $repo->droitsSurPlaylistVideEnSession();
 
                 $renderer = new AudioListRenderer($playlist);
