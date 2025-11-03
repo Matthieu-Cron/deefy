@@ -9,7 +9,7 @@ use iutnc\deefy\Action\AddUserAction;
 use iutnc\deefy\Action\DefaultAction;
 use iutnc\deefy\Action\DisplayPlayListeAction;
 use iutnc\deefy\Action\MesPlaylisteAction;
-use iutnc\deefy\Action\signinAction;
+use iutnc\deefy\Action\SigninAction;
 
 class Dispatcher
 {
