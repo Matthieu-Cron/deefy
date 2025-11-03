@@ -112,7 +112,7 @@ class DeefyRepository
 
    public function findPlaylistById(int $id): Playlists
    {
-       $sql = "SELECT nom from Playlist WHERE id = :id";
+       $sql = "SELECT nom from playlist WHERE id = :id";
        $stmt = $this->pdo->prepare($sql);
        $stmt->execute(['id' => $id]);
        $row = $stmt->fetch();
