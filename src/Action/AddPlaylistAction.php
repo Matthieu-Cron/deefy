@@ -2,7 +2,6 @@
 
 namespace iutnc\deefy\Action;
 
-use iutnc\deefy\action\Action;
 use iutnc\deefy\audio\lists\PlayLists;
 use iutnc\deefy\renders\AudioListRenderer;
 use iutnc\deefy\repository\DeefyRepository;

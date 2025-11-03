@@ -2,8 +2,6 @@
 
 namespace iutnc\deefy\Action;
 
-use Exception;
-use iutnc\deefy\audio\lists\PlayLists;
 use iutnc\deefy\auth\Authz;
 use iutnc\deefy\renders\AudioListRenderer;
 use iutnc\deefy\repository\DeefyRepository;

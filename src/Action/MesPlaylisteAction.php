@@ -2,7 +2,6 @@
 
 namespace iutnc\deefy\Action;
 
-use iutnc\deefy\action\Action;
 use iutnc\deefy\auth\Authz;
 use iutnc\deefy\repository\DeefyRepository;
 

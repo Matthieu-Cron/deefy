@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy\action;
+namespace iutnc\deefy\Action;
 
 abstract class Action {
 
